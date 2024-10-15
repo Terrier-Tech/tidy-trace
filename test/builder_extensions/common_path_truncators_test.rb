@@ -5,7 +5,7 @@ require "tidy-trace/builder"
 require "tidy-trace/extensions/common_path_truncators"
 
 describe TidyTrace::Extensions::CommonPathTruncators do
-  describe :truncate_bin_path do
+  describe :truncate_not_bin_path do
     it "should truncate the backtrace to lines before the bin directory" do
       backtrace = %W[
         /path/to/file.rb
@@ -13,7 +13,7 @@ describe TidyTrace::Extensions::CommonPathTruncators do
       ]
 
       tidier = TidyTrace::Builder.new
-        .truncate_bin_path
+        .truncate_not_bin_path
         .build
 
       actual = tidier.truncate(backtrace)
@@ -24,7 +24,7 @@ describe TidyTrace::Extensions::CommonPathTruncators do
     end
   end
 
-  describe :truncate_local_rails_middleware_path do
+  describe :truncate_not_local_rails_middleware_path do
     it "should truncate backtrace to lines before the middleware directory" do
       backtrace = %W[
         /path/to/file.rb
@@ -32,7 +32,7 @@ describe TidyTrace::Extensions::CommonPathTruncators do
       ]
 
       tidier = TidyTrace::Builder.new
-        .truncate_local_rails_middleware_path
+        .truncate_not_local_rails_middleware_path
         .build
 
       actual = tidier.truncate(backtrace)
