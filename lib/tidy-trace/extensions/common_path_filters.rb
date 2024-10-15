@@ -15,9 +15,10 @@ module TidyTrace
       end
 
       # Filters to only lines within the current project.
+      # @param path_root [String] the root path of the project
       # @return [self]
-      def filter_project_paths
-        project_path = (Dir.pwd + "/").freeze
+      def filter_project_paths(path_root: Dir.pwd)
+        project_path = (path_root + "/").freeze
         filter_prefix(project_path)
       end
     end
